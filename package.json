@@ -2,8 +2,7 @@
   "dependencies": {
     "concurrently": "^9.1.0"
   },
-  "scripts" : {
-    "dev" : "concurrently \"cd backend/next_test && npm run start:dev\" \"cd frontend/next_test && npm run dev\""
+  "scripts": {
+    "dev": "concurrently \"cd backend/next_test && npm run start:dev\" \"cd frontend/next_test && npm run dev\""
   }
-    
 }
