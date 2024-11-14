@@ -1,0 +1,26 @@
+.container{
+    position: fixed;
+    top: 0;
+    background-color: white;
+    width: 100vw;
+    display: flex;
+}
+.container a {
+    text-decoration: none; color:black;
+    font-size: 16px;
+}
+.container h2 {
+    margin-left: 200px;
+    margin-top: 15px;
+}
+.loginBox {
+    margin: 20px 0;
+    margin-left: 67.708vw;
+}
+.loginBox a {
+    font-size: 18px;
+}
+.loginBox a:hover {
+    text-decoration:underline;
+    font-weight: 900;
+}

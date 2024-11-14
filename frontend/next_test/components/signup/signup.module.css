@@ -1,0 +1,24 @@
+.container {
+    margin-left: 10px ; 
+}
+
+.subtitle {
+    margin: 5px 0 ;
+}
+
+.box {
+    margin-top: 10px;
+}
+.box input {
+    padding: 5px 7px;
+    width: 30%;
+    border: 1px solid black ;border-radius: 0;
+    height: 18px;
+}
+.box:last-child input {
+    width: 20%;
+}
+.box select {
+    padding: 5px 7px;
+    margin-left: 10px;
+}
