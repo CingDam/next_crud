@@ -15,4 +15,12 @@ export class UserDao {
     @InjectRepository(UserInfo)
     private userInfoRepository: Repository<UserInfo>,
   ) {}
+
+  async login(item: { user_id: string; user_pwd: string }): Promise<UserInfo> {
+    const userData = this.userInfoRepository.findOne({
+      where: { userId: item.user_id, userPwd: item.user_pwd },
+    });
+
+    return userData;
+  }
 }

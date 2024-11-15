@@ -27,8 +27,8 @@ export class AppModule implements NestModule {
           resave: false,
           saveUninitialized: false,
           cookie: {
-            httpOnly: true,
             sameSite: "lax",
+            secure: false,
           },
         }),
       )

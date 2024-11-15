@@ -1,8 +1,9 @@
-import Login from "../../components/login/login"
+import Login, { LoginData } from "../../components/login/login"
 
 export const metadata = {
     title : "login"
 }
+
 
 export default function LoginPage(){
     return (

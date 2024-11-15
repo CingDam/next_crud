@@ -2,18 +2,18 @@ import { Column, ViewEntity } from "typeorm";
 
 @ViewEntity("user_info")
 export class UserInfo {
-  @Column()
+  @Column({ name: "user_num" })
   userNum: number;
 
-  @Column()
+  @Column({ name: "user_id" })
   userId: string;
 
-  @Column()
+  @Column({ name: "user_pwd" })
   userPwd: string;
 
-  @Column()
+  @Column({ name: "user_email" })
   userEmail: string;
 
-  @Column()
+  @Column({ name: "signup_date" })
   signupDate: Date;
 }
