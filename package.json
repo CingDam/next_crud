@@ -1,6 +1,8 @@
 {
   "dependencies": {
-    "concurrently": "^9.1.0"
+    "@nestjs/platform-express": "^10.4.7",
+    "concurrently": "^9.1.0",
+    "express-session": "^1.18.1"
   },
   "scripts": {
     "dev": "concurrently \"cd backend/next_test && npm run start:dev\" \"cd frontend/next_test && npm run dev\""
