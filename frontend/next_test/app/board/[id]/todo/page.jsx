@@ -1,23 +1,32 @@
-import axios from "axios"
 import Dashboard from "../../../../components/dashboard/dashboard"
 import { baseUrl } from "../../../config"
+import { redirect } from "next/navigation"
 
 export const metadata = {
     title: "Dashboard"
 }
 
-const getBoardData = async (id) => {
-    console.log(id)
-    const response = await fetch(`${baseUrl}/gettodo`,{
-        method:"GET",
-        credentials:"include",
+async function getSession() {
+
+    const response = await fetch(`${baseUrl}/session-chk`,{
+        credentials: 'include',
+        cache: "no-store",
     })
-    const data = response.json()
-    console.log(data.user);
+
+    const data = await response.json();
+    console.log("dashboard session");
+    console.log(data);
+
+    if(data) {
+        return data;
+    } else {
+        return false;
+    }
+    
 }
+
 
 export default async function DashboardPage({params}) {
     const id = await params
-    const boards = getBoardData(id)
-    return <Dashboard></Dashboard>
+    return <Dashboard/> 
 }
