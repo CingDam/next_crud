@@ -23,11 +23,11 @@ export class AppModule implements NestModule {
     consumer
       .apply(
         session({
-          secret: "my-secret-key",
+          secret: "my-secret",
           resave: false,
           saveUninitialized: false,
           cookie: {
-            sameSite: "lax",
+            httpOnly: false,
             secure: false,
           },
         }),
