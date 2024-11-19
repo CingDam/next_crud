@@ -4,7 +4,7 @@ import Link from "next/link"
 import loginStyle from "./login.module.css"
 import { useRef } from "react";
 import { baseUrl } from "../../app/config";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 
 const url = 'user'
@@ -21,7 +21,6 @@ export default function Login() {
             if(id && pwd) {
                 idRef.current.value = '';
                 pwRef.current.value = '';
-                console.log("눌림");
                 const response = await fetch(`${baseUrl}/${url}/login`,{
                     method: 'POST',
                     credentials: 'include',
@@ -32,12 +31,7 @@ export default function Login() {
                         user_pwd: pwd
                     })
                 })
-
-                console.log("조회성공!");
-                console.log("눌림");
                 const data = await response.json();
-
- 
                 console.log(data);
                 router.push(`/board/${data.user.userNum}/todo`);
 
