@@ -15,7 +15,7 @@
 }
 .loginBox {
     margin: 20px 0;
-    margin-left: 67.708vw;
+    margin-left: 66.708vw;
 }
 .loginBox a {
     font-size: 18px;
@@ -23,4 +23,8 @@
 .loginBox a:hover {
     text-decoration:underline;
     font-weight: 900;
+}
+
+.loading{
+    margin: 40px;
 }

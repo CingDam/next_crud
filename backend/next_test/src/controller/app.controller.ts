@@ -5,9 +5,7 @@ import { Request, Response } from "express";
 export class AppController {
   @Get("/session-chk")
   sessionChk(@Req() req: Request, @Res() res: Response) {
-    console.log(req.session.user ? req.session.user : console.log("값이 없음"));
     if (req.session.user) {
-      console.log("success");
       return res
         .status(200)
         .json({ message: "Authorized", user: req.session.user });

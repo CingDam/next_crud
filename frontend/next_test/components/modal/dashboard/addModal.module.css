@@ -1,0 +1,57 @@
+.title input {
+    margin-top: 10px;
+    border: none; border-bottom: 2px solid black; border-radius: 1px;
+    height: 24px; width: 325px;
+}
+.title input:focus {
+    outline: none;
+}
+.type {
+    margin-top: 20px;
+}
+.type select {
+    margin-top: 5px;
+    font-size: 14px;
+    border-bottom: 1px solid black;
+}
+.type select:focus {
+    outline: none;
+}
+.textBox {
+    margin-top: 20px;
+}
+.textBox textarea {
+    font-family:  "Noto Sans KR", serif;
+    margin-top: 10px;
+    font-size: 12px;
+    width: 325px; height: 325px;
+    border: 1px solid black; border-radius: none; resize: none;
+}
+.textBox textarea:focus {
+    outline: none;
+}
+.buttonBox {
+    margin-left: 120px ; margin-top: 50px;
+}
+.buttonBox button {
+    border: none; color: white;
+    font-size: 18px;
+    width: 100px; height: 36px;
+    background-color: #001d6e;
+}
+.buttonBox button:hover {
+    cursor: pointer;
+    background-color: white; color: black;
+    box-shadow: 1px 1px 2px black;
+    transition: 0.2s;
+}
+.close {
+    position: absolute;
+    top: 15px;right: 15px;
+}
+.close > img {
+    width: 15px; height: 15px;
+}
+.close > img:hover {
+    cursor: pointer;
+}

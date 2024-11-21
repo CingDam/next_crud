@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { ToDo } from "./board.entity";
 
 // @Entity('value') => value는 테이블 or 뷰이름
 // value가 빈 값일 경우 typeorm이 자동생성
@@ -24,4 +25,7 @@ export class User {
 
   @Column()
   signup_date: Date;
+
+  @OneToMany(() => ToDo, (todo) => todo.user)
+  todos: ToDo[];
 }

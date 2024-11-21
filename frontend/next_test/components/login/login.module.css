@@ -1,4 +1,5 @@
 .container{
+    background-color: white;
     box-sizing: content-box;
     display: flex;
     flex-direction: column;
