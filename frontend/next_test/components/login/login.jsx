@@ -31,9 +31,17 @@ export default function Login() {
                         user_pwd: pwd
                     })
                 })
+
+                if(response.status === 401) {
+                    alert("아이디 혹은 비밀번호를 확인해주세요!");
+                    idRef.current.focus();
+                }
+
                 const data = await response.json();
                 console.log(data);
-                router.push(`/board/${data.user.userNum}/todo`);
+                if(data.user){
+                    router.push(`/board/${data.user.userNum}/todo`);
+                }
 
             }
 

@@ -6,6 +6,8 @@ import * as session from "express-session";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { typeOrmConfig } from "src/config/typeorm.config";
 import { ConfigModule } from "@nestjs/config";
+import { TodoController } from "src/controller/todo.controller";
+import { TodoModule } from "./todo.module";
 
 @Module({
   imports: [
@@ -14,8 +16,9 @@ import { ConfigModule } from "@nestjs/config";
     }),
     TypeOrmModule.forRoot(typeOrmConfig),
     UserModule,
+    TodoModule,
   ],
-  controllers: [AppController, UserController],
+  controllers: [AppController, UserController, TodoController],
   providers: [],
 })
 export class AppModule implements NestModule {
@@ -23,12 +26,15 @@ export class AppModule implements NestModule {
     consumer
       .apply(
         session({
+          name: "sessionId",
           secret: "my-secret",
           resave: false,
           saveUninitialized: false,
           cookie: {
             httpOnly: false,
             secure: false,
+            sameSite: "lax",
+            path: "/",
           },
         }),
       )
