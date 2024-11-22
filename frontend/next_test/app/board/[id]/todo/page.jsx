@@ -11,7 +11,6 @@ export const metadata = {
 }
 
 const getTodoList = async ({id}) => {
-    console.log(id);
     const res = await fetch(`${baseUrl}/${url}/get-todo`, {
         method:"POST",
         headers: {
@@ -23,7 +22,6 @@ const getTodoList = async ({id}) => {
     })
 
     const data = await res.json();
-    console.log(data.item);
     return data.item;
     
 }
@@ -31,7 +29,6 @@ const getTodoList = async ({id}) => {
 export default async function DashboardPage({params}) {
     const id = await params
     const datas = await getTodoList(id);
-    console.log(datas);
     return (
         <>
             { await getSession() !== null ?

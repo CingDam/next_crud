@@ -8,5 +8,5 @@ export const metadata = {
 
 export default async function HomePage() {
   const session = await getSession();
-  return <Home user={session}></Home>
+  return <Home session={session}></Home>
 }

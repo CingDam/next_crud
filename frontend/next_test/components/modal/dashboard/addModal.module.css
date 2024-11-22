@@ -17,18 +17,65 @@
 .type select:focus {
     outline: none;
 }
-.textBox {
+.jobBox {
+    margin-top: 20px;
+    height: 350px;
+    overflow: auto;
+    -ms-overflow-style: none;
+}
+.jobBox::-webkit-scrollbar{
+    display: none;
+}
+.job {
     margin-top: 20px;
 }
-.textBox textarea {
-    font-family:  "Noto Sans KR", serif;
-    margin-top: 10px;
-    font-size: 12px;
-    width: 325px; height: 325px;
-    border: 1px solid black; border-radius: none; resize: none;
+
+.jobInput {
+    width: 325px;
+    border-bottom: 2px solid black; border-radius: 1px;
 }
-.textBox textarea:focus {
+.job input {
+    border: none;
+    height: 24px; width: 265px;
+} 
+.job input:focus {
     outline: none;
+}
+.baseJobInput {
+    width: 325px;
+    border-bottom: 2px solid black; border-radius: 1px;
+    margin-bottom: 30px;
+}
+.baseJobInput input {
+    width: 325px;
+}
+.jobAddBtn {
+    margin-top: 50px; margin-left: 250px;
+}
+.jobAddBtn > button {
+    padding: 10px;
+    border: none;
+    background-color: #001d6e;
+    color: white;
+}
+.jobAddBtn > button:hover {
+    cursor: pointer;
+    color: black; text-decoration: underline;
+    background-color: white;
+    transition: 0.3s;
+}
+.deleteJobInput > button {
+    position: relative;
+    left: 275px; bottom: 35px;
+    padding: 5px 10px;
+    border: none; color: white;
+    background-color: #001d6e;
+}
+.deleteJobInput > button:hover {
+    cursor: pointer;
+    color: black; text-decoration: underline;
+    background-color: white;
+    transition: 0.3s;
 }
 .buttonBox {
     margin-left: 120px ; margin-top: 50px;

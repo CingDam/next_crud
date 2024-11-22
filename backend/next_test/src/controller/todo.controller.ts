@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Post } from "@nestjs/common";
 import { TodoService } from "src/service/todo.service";
 
 @Controller("/todo")
@@ -20,11 +20,23 @@ export class TodoController {
   async addTodoList(
     @Body() item: { id: number; title: string; type: string; content: string },
   ) {
-    const addData = this.todoService.addTodoList(item);
+    console.log(item);
+    const addData = await this.todoService.addTodoList(item);
     if (addData) {
       return { messasge: "추가 성공" };
     } else {
       return { message: "추가 실패!" };
+    }
+  }
+
+  @Delete("/delete")
+  async deleteTodoList(@Body() item: { userNum: number; todoNum: number }) {
+    console.log(item);
+    const deleteData = await this.todoService.deleteTodoList(item);
+    if (deleteData) {
+      return { message: "삭제 성공" };
+    } else {
+      return { message: "삭제 실패" };
     }
   }
 }
