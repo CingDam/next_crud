@@ -17,8 +17,18 @@ export class TodoService {
     type: string;
     content: string;
   }) {
+    console.log("todoService:", item);
     const addData = await this.todoDao.addTodoList(item);
     if (addData) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  async deleteTodoList(item: { userNum: number; todoNum: number }) {
+    const deleteData = await this.todoDao.deleteTodoList(item);
+    if (deleteData) {
       return true;
     } else {
       return false;

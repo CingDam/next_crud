@@ -3,9 +3,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { User } from "./user.entity";
+import { ToDoDetail } from "./todoDetail.entity";
 
 @Entity("todo")
 export class ToDo {
@@ -24,7 +26,13 @@ export class ToDo {
   @Column({ name: "todo_date" })
   todoDate: Date;
 
+  @Column({ name: "user_user_num" })
+  userUserNum: number;
+
   @ManyToOne(() => User, (user) => user.todos, { onDelete: "CASCADE" })
   @JoinColumn({ name: "user_user_num" })
   user: User;
+
+  @OneToOne(() => ToDoDetail, (detail) => detail.todo)
+  detail: ToDoDetail;
 }
