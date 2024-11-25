@@ -1,13 +1,19 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { ToDoDetail } from "./todoDetail.entity";
 
-@Entity("todo_detail_job")
+@Entity("detail_job_list")
 export class TodoDetailJob {
   @PrimaryGeneratedColumn({ name: "job_num" })
   jobNum: number;
 
   @Column({ name: "job_title" })
-  jobTile: string;
+  jobTitle: string;
 
   @Column({ name: "job_chk" })
   jobChk: string;
@@ -15,6 +21,9 @@ export class TodoDetailJob {
   @Column({ name: "todo_detail_todo_todo_num" })
   todoDetailTodoTodoNum: number;
 
-  @ManyToOne(() => ToDoDetail, (todoDetail) => todoDetail.todoTodoNum)
+  @ManyToOne(() => ToDoDetail, (todoDetail) => todoDetail.jobs, {
+    onDelete: "CASCADE",
+  })
+  @JoinColumn({ name: "todo_detail_todo_todo_num" })
   todoDetail: ToDoDetail;
 }

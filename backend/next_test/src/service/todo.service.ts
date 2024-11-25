@@ -15,7 +15,7 @@ export class TodoService {
     id: number;
     title: string;
     type: string;
-    content: string;
+    contents: string[];
   }) {
     console.log("todoService:", item);
     const addData = await this.todoDao.addTodoList(item);

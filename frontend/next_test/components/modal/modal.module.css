@@ -11,17 +11,33 @@
     top: 70px; left: calc(100vw - 1200px);
     width: 400px; 
     background-color: white;
-    animation: down 1.1s, fade-in 0.5s
+    animation: down-add 1.1s, fade-in 0.5s
 }
-.container > div {
+.container.detailUpdate {
+    padding : 50px;
+    position: relative;
+    top: 340px; left: calc(100vw - 1200px);
+    width: 400px; 
+    background-color: white;
+    animation: down-detailUpdate 1.1s, fade-in 0.5s
+}
+.container.add  > div {
     padding-left: 30px;
 }
 
-@keyframes down {
+@keyframes down-add {
     from {
         top : -250px
     } to {
         top : 70px
+    }
+}
+
+@keyframes down-detailUpdate {
+    from {
+        top : -250px
+    } to {
+        top : 340px
     }
 }
 

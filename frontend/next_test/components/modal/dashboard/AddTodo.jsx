@@ -38,7 +38,7 @@ export default function AddTodo({closeModal,id}) {
                 id:Number(id.id),
                 title: title,
                 type: selectTodoType,
-                content: contents
+                contents: contents
             })
         }).then (res => res.json())
         .then(data => {

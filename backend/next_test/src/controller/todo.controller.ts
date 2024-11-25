@@ -18,7 +18,13 @@ export class TodoController {
 
   @Post("/add-todo")
   async addTodoList(
-    @Body() item: { id: number; title: string; type: string; content: string },
+    @Body()
+    item: {
+      id: number;
+      title: string;
+      type: string;
+      contents: string[];
+    },
   ) {
     console.log(item);
     const addData = await this.todoService.addTodoList(item);
