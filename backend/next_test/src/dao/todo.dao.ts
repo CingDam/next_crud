@@ -38,7 +38,7 @@ export class TodoDao {
     id: number;
     title: string;
     type: string;
-    content: string;
+    contents: string[];
   }) {
     console.log("TodoDao:", item);
     console.log("TodoDao Title:", item.title);
@@ -49,9 +49,6 @@ export class TodoDao {
     try {
       // 1번작업시작
       // insert결과물 저장
-
-      console.log(item.type);
-
       const insertResult = await queryRunner.manager.insert("todo", {
         todoTitle: item.title,
         todoType: item.type,
@@ -66,7 +63,13 @@ export class TodoDao {
       // 2번 작업시작
       await queryRunner.manager.insert("todo_detail", {
         todoTodoNum: generatedTodoNum, // 생성된 toDoNum을 보냄
-        content: item.content,
+      });
+
+      item.contents.forEach(async (content) => {
+        await queryRunner.manager.insert("detail_job_list", {
+          jobTitle: content,
+          todoDetailTodoTodoNum: generatedTodoNum,
+        });
       });
 
       //작업이 잘 되면 commit

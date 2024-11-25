@@ -1,0 +1,42 @@
+.container {
+    text-align: center;
+}
+.container label {
+    font-size: 24px; 
+    font-weight: 900;
+}
+.container input {
+    margin-top: 20px;
+    text-align: left;
+    border: none; border-bottom: 2px solid black; 
+    outline: none;
+    font-size: 16px;
+    height: 32px; width: 300px;
+}
+
+.btnBox {
+    margin-top: 30px;
+}
+.btnBox > button {
+    border: none;
+    padding: 10px 30px;
+    background-color: #001d6e;
+    font-size: 16px; font-weight: 700; color: white;
+}
+
+.btnBox > button:hover {
+    background-color: white;
+    box-shadow: 1px 1px 5px black;
+    color: black;
+    transition: 0.3s;
+}
+.close {
+    position: absolute;
+    top: 15px; right: 20px;
+}
+.close > img {
+    width: 15px; height: 15px;
+}
+.close > img:hover {
+    cursor: pointer;
+}

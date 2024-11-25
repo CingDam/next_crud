@@ -8,6 +8,8 @@ import { typeOrmConfig } from "src/config/typeorm.config";
 import { ConfigModule } from "@nestjs/config";
 import { TodoController } from "src/controller/todo.controller";
 import { TodoModule } from "./todo.module";
+import { JobController } from "src/controller/job.controller";
+import { JobModule } from "./job.module";
 
 @Module({
   imports: [
@@ -17,8 +19,9 @@ import { TodoModule } from "./todo.module";
     TypeOrmModule.forRoot(typeOrmConfig),
     UserModule,
     TodoModule,
+    JobModule,
   ],
-  controllers: [AppController, UserController, TodoController],
+  controllers: [AppController, UserController, TodoController, JobController],
   providers: [],
 })
 export class AppModule implements NestModule {

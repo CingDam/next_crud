@@ -14,7 +14,7 @@ export default function Dashboard({datas,id}) {
     const [addModal, setAddModal] = useState(false);
     const [detailModal , setDetailModal] = useState(false);
 
-    const delValRef = useRef();
+    const delValRef = useRef([]);
     const router = useRouter();
     const path = usePathname();
     
@@ -32,12 +32,7 @@ export default function Dashboard({datas,id}) {
     })
 
     const addTodoModal = () => {
-        console.log("추가");
         setAddModal(true);
-    }
-    
-    const updateTodo = () => {
-        console.log("수정");
     }
     
     const deleteTodo = async (todoNum) => {
@@ -65,8 +60,9 @@ export default function Dashboard({datas,id}) {
 
     }
     
-    const todoResult = () => {
-        console.log("결과 업데이트");
+    const todoMultipleDelete = () => {
+        console.log("다중삭제");
+        console.log("삭제글 번호 :" , delValRef.current.map(ref => ref?.value || ''))
     }
 
     const closeModal = (value) => {
@@ -87,14 +83,17 @@ export default function Dashboard({datas,id}) {
                 </tr>
             </thead>
             <tbody>
-                {datas.map((data,index) => (
+                {datas.length === 0 ?
+                <tr><td colSpan={5}>값이 없습니다!</td></tr>
+                :
+                datas.map((data,index) => (
                     index < 10 && (
                         <tr key={data.todoNum}>
                         <td><input type="checkbox" 
                             value={data.todoNum}
                             defaultChecked={data.todoChk === 'Y' ? true : false}
                             readOnly = {data.todoChk === 'Y'  ? true : false}
-                            ref={delValRef}
+                            ref={el => delValRef.current[index] = el}
                             />
                         </td>
                         <td>{data.todoType}</td>
@@ -109,14 +108,15 @@ export default function Dashboard({datas,id}) {
                             </td>
                     </tr>
                     )
-                ))}
+                ))
+            }   
             </tbody>
         </table>
         <div>
 
         </div>
         <div>
-            <button onClick={addTodoModal}>추가하기</button> <button onClick={todoResult}>오늘일정 결과 올리기</button>
+            <button onClick={addTodoModal}>추가하기</button> <button onClick={todoMultipleDelete}>다중 삭제</button>
         </div>
         {
             addModal && <AddTodo closeModal={closeModal} id={id}></AddTodo>
