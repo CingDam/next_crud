@@ -12,16 +12,16 @@ export default function Detail({id,datas,url}) {
     const router = useRouter();
 
     const [detailUpdate,setDetailUpdate] = useState(false);
-    const [title, setTitle] = useState(null);
+    const [title, setTitle] = useState("");
+    const [jobNum, setJobNum] = useState("");
 
     const jobDelValRef = useRef([]); 
     
-    const onDetailUpdate = (title) => {
-        
-        console.log(title);
+    const onDetailUpdate = (title,jobNum) => {
 
         setDetailUpdate(true);
         setTitle(title);
+        setJobNum(jobNum);
     }
 
     const jobDel = async (jobNum) => {
@@ -68,11 +68,11 @@ export default function Detail({id,datas,url}) {
                                 ref={el => jobDelValRef.current[index] = el}
                                 />
                                 </td>
-                                <td>{data.jobNum}</td>
+                                <td>{index+1}</td>
                                 <td>{data.jobTitle}</td>
                                 <td>
                                     <div>
-                                        <button onClick={() => {onDetailUpdate(data.jobTitle)}}>수정</button> <button onClick={()=> jobDel(data.jobNum)}>삭제</button>
+                                        <button onClick={() => {onDetailUpdate(data.jobTitle, data.jobNum)}}>수정</button> <button onClick={()=> jobDel(data.jobNum)}>삭제</button>
                                     </div>
                                 </td>
                             </tr>
@@ -88,7 +88,14 @@ export default function Detail({id,datas,url}) {
                 <Link href={'./'}>돌아가기</Link>
             </div>
             {
-                detailUpdate && <UpdateDetailModal title={title} setDetailUpdate={setDetailUpdate}></UpdateDetailModal>
+                detailUpdate && 
+                <UpdateDetailModal 
+                    title={title} 
+                    setDetailUpdate={setDetailUpdate}
+                    jobNum = {jobNum}
+                    url = {url}
+                    router = {router}
+                />
             }
         </div>
     )
