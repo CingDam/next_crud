@@ -2,8 +2,16 @@ import axios from "axios";
 import ModalStyle from "../../modal.module.css";
 import UpdateModalStyle from "./update.module.css";
 import { baseUrl } from "../../../../app/config";
+import { useRef } from "react";
 
-export default function UpdateDetailModal({title, jobNum, setDetailUpdate,router}) {
+export default function UpdateDetailModal({
+    title, 
+    jobNum, 
+    setDetailUpdate, 
+    router,
+    url,
+    id
+}) {
 
     console.log(title);
 
@@ -13,18 +21,18 @@ export default function UpdateDetailModal({title, jobNum, setDetailUpdate,router
         setDetailUpdate(false);
     }
 
-    const updateDetailJob = () => {
+    const updateDetailJob = async () => {
+        console.log(id);
         console.log(jobNum,updateValRef.current.value)
-        const res = axios.put(`${baseUrl}/${url}/update-job`, {
-            data: {
+        const res = await axios.put(`${baseUrl}/${url}/update-job`, {
+                todoNum : id,
                 jobNum : jobNum,
                 title: updateValRef.current.value
-            }
         })
 
         const data = res.data
 
-        if(data === true) {
+        if(data.chk === true) {
             closeModalBox();
             router.refresh();
         }

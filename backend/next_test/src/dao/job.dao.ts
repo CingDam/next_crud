@@ -24,6 +24,25 @@ export class JobDao {
     return jobs;
   }
 
+  async updateJob(item: { jobNum: number; todoNum: number; title: string }) {
+    console.log(item);
+    const updateChk = await this.jobRepository.update(
+      {
+        jobNum: item.jobNum,
+        todoDetailTodoTodoNum: item.todoNum,
+      },
+      {
+        jobTitle: item.title,
+      },
+    );
+    console.log("수정확인:", updateChk);
+    if (updateChk.affected !== 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   async delJob(item: { jobNum: number; todoNum: number }) {
     const jobChk = await this.jobRepository.delete({
       todoDetailTodoTodoNum: item.todoNum,

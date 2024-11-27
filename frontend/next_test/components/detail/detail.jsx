@@ -22,6 +22,7 @@ export default function Detail({id,datas,url}) {
         setDetailUpdate(true);
         setTitle(title);
         setJobNum(jobNum);
+
     }
 
     const jobDel = async (jobNum) => {
@@ -45,6 +46,30 @@ export default function Detail({id,datas,url}) {
             alert(data.message);
         }
     }
+
+    const multipleJobDelte = async () => {
+        const jobDelList = jobDelValRef.current
+        //필터로 먼저 ref값과 ref에서 checked속성 받아오기
+        .filter(ref => ref && ref.checked)
+        // map으로 새 배열 생성
+        .map(ref => ref?.value || '');
+        
+
+        const res = await axios.delete(`${baseUrl}/${url}/del-jobs`, {
+            data: {
+                todoNum: id,
+                jobNum: jobDelList
+            }
+        },{
+            headers:{
+                "Content-Type": "application/json"
+            }
+        })
+
+        const data = res.data
+
+        console.log(data)
+    } 
 
     return (
         <div className={detailStyle.container}>
@@ -72,7 +97,11 @@ export default function Detail({id,datas,url}) {
                                 <td>{data.jobTitle}</td>
                                 <td>
                                     <div>
-                                        <button onClick={() => {onDetailUpdate(data.jobTitle, data.jobNum)}}>수정</button> <button onClick={()=> jobDel(data.jobNum)}>삭제</button>
+                                        <button onClick={() => {onDetailUpdate(
+                                            data.jobTitle,
+                                            data.jobNum
+                                            )}}>수정</button> 
+                                            <button onClick={()=> jobDel(data.jobNum)}>삭제</button>
                                     </div>
                                 </td>
                             </tr>
@@ -82,7 +111,7 @@ export default function Detail({id,datas,url}) {
                 </tbody>
             </table>
             <div>
-                <button>완료 작업 체크하기</button> <button>다중 삭제</button>
+                <button>완료 작업 체크하기</button> <button onClick={multipleJobDelte}>다중 삭제</button>
             </div>
             <div>
                 <Link href={'./'}>돌아가기</Link>
@@ -92,6 +121,7 @@ export default function Detail({id,datas,url}) {
                 <UpdateDetailModal 
                     title={title} 
                     setDetailUpdate={setDetailUpdate}
+                    id={id}
                     jobNum = {jobNum}
                     url = {url}
                     router = {router}
