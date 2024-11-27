@@ -9,7 +9,17 @@ export class JobService {
     return await this.jobDao.getJobs(item);
   }
 
-  async delJob(item: { jobNum: number; todoNum: number }){
+  async updateJob(item: { todoNum: number; jobNum: number; title: string }) {
+    const updateChk = await this.jobDao.updateJob(item);
+
+    if (updateChk) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  async delJob(item: { jobNum: number; todoNum: number }) {
     const jobChk = await this.jobDao.delJob(item);
 
     if (jobChk) {

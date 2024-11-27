@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Post, Put } from "@nestjs/common";
 import { JobService } from "src/service/job.service";
 
 @Controller("/jobs")
@@ -16,6 +16,19 @@ export class JobController {
     }
   }
 
+  @Put("update-job")
+  async UpdateJob(
+    @Body() item: { todoNum: number; jobNum: number; title: string },
+  ) {
+    const updateChk = await this.jobService.updateJob(item);
+
+    if (updateChk) {
+      return { chk: true };
+    } else {
+      return { chk: false };
+    }
+  }
+
   @Delete("del-job")
   async delJob(@Body() item: { jobNum: number; todoNum: number }) {
     console.log("삭제 값:", item);
@@ -26,5 +39,12 @@ export class JobController {
     } else {
       return { message: "삭제 실패!" };
     }
+  }
+
+  @Delete("del-jobs")
+  async delJobs(@Body() item: { todoNum: number; jobNum: number[] }) {
+    console.log(item);
+
+    return { message: "값 받아오기 성공" };
   }
 }
