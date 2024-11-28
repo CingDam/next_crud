@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { TodoDetailJob } from "src/entity/table/job.entity";
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 
 @Injectable()
 export class JobDao {
@@ -52,6 +52,19 @@ export class JobDao {
     console.log(jobChk);
 
     if (jobChk.affected !== 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  async delJobs(item: { todoNum: number; jobNum: number[] }) {
+    const multiJobChk = await this.jobRepository.delete({
+      todoDetailTodoTodoNum: item.todoNum,
+      jobNum: In(item.jobNum),
+    });
+
+    if (multiJobChk.affected !== 0) {
       return true;
     } else {
       return false;

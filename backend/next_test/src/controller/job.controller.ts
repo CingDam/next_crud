@@ -1,18 +1,27 @@
 import { Body, Controller, Delete, Post, Put } from "@nestjs/common";
 import { JobService } from "src/service/job.service";
+import { TodoService } from "src/service/todo.service";
 
 @Controller("/jobs")
 export class JobController {
-  constructor(private readonly jobService: JobService) {}
+  constructor(
+    private readonly jobService: JobService,
+    private readonly todoService: TodoService,
+  ) {}
 
   @Post("get-job")
-  async getJobs(@Body() item: { todoNum: number }) {
+  async getJobs(@Body() item: { userNum: number; todoNum: number }) {
     const jobs = await this.jobService.getJobs(item);
+    console.log("할 일 길이:", jobs.length);
 
-    if (jobs) {
-      return { message: "할 일 목록 받아오기 성공!", item: jobs };
+    if (jobs.length === 0) {
+      this.todoService.deleteTodoList(item);
     } else {
-      return { message: "받아오기 실패!" };
+      if (jobs) {
+        return { message: "할 일 목록 받아오기 성공!", item: jobs };
+      } else {
+        return { message: "받아오기 실패!" };
+      }
     }
   }
 
@@ -44,7 +53,12 @@ export class JobController {
   @Delete("del-jobs")
   async delJobs(@Body() item: { todoNum: number; jobNum: number[] }) {
     console.log(item);
+    const multidelChk = await this.jobService.delJobs(item);
 
-    return { message: "값 받아오기 성공" };
+    if (multidelChk) {
+      return { chk: true };
+    } else {
+      return { chk: false };
+    }
   }
 }
