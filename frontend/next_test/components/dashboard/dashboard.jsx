@@ -21,6 +21,14 @@ export default function Dashboard({datas,id}) {
 
     console.log(datas);
     const dayOfWeek = ['월', '화', '수', '목', '금', '일', '월']
+    const jobType = {
+       design: '디자인',
+       publishing: '퍼블리싱',
+       frontend: '프론트 엔드',
+       backend: '백 엔드',
+       document: '문서',
+       iot: 'IoT'       
+    }
     const dates = datas.map(data => {
         const date = new Date(data.todoDate);
         return {
@@ -72,7 +80,7 @@ export default function Dashboard({datas,id}) {
     }
     
     return (<div className={dashboardStyle.container}>
-        <table border={1}>
+        <table>
             <thead>
                 <tr>
                     <th>체크</th>
@@ -91,7 +99,7 @@ export default function Dashboard({datas,id}) {
                         <tr key={data.todoNum}>
                         <td><input type="checkbox" 
                             value={data.todoNum}
-                            defaultChecked={data.todoChk === 'Y' ? true : false}
+                            defaultChecked= {data.todoChk === 'Y' ? true : false}
                             readOnly = {data.todoChk === 'Y'  ? true : false}
                             ref={el => delValRef.current[index] = el}
                             />
@@ -115,7 +123,7 @@ export default function Dashboard({datas,id}) {
         <div>
 
         </div>
-        <div>
+        <div className={dashboardStyle.btnBox}>
             <button onClick={addTodoModal}>추가하기</button> <button onClick={todoMultipleDelete}>다중 삭제</button>
         </div>
         {

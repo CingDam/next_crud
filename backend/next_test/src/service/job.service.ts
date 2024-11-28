@@ -28,4 +28,14 @@ export class JobService {
       return false;
     }
   }
+
+  async delJobs(item: { todoNum: number; jobNum: number[] }) {
+    const multiJobChk = await this.jobDao.delJobs(item);
+
+    if (multiJobChk) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

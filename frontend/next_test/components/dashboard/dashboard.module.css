@@ -1,7 +1,76 @@
 .container {
-    margin-top : 200px; margin-left: 600px;
+    margin-top : 200px; margin-left: calc(100vw - 1420px);
     
 }
 .container table {
+    border-spacing: 0.5px;
+}
+
+.container table button {
+    border: none; border-radius: 8px;
+    font-size: 14px; color: white;
+    padding: 6px 10px;
+    background-color: #d60f01;
+}
+
+.container table button:hover {
+    cursor: pointer;
+    background-color: #e63327;
+    transition: 0.2s;
+}
+
+.container table tr th {
+    padding: 6px 7px;
+    color: white;
+    background-color: #001D6E;
+}
+
+.container table tr th:hover {
+    cursor: pointer;
+    background-color: #1f3c8d;
+    transition: 0.2s;
+}
+
+.container tbody {
     background-color: white;
+}
+
+.container table tr th:nth-child(3) {
+    text-align: left;
+    width: 500px;
+}
+
+.container table tr td {
+    border-top: 1px solid black;
+    padding: 5px 10px;
+}
+
+.container table tr th:last-child {
+    width: 60px;
+}
+
+.btnBox {
+    margin-top: 10px;
+}
+
+.btnBox button {
+    border: none; border-radius: 8px;
+    font-size: 14px; color: white;
+    padding: 9px 12px;
+    background-color: #001D6E;
+}
+
+.btnBox button:hover {
+    cursor: pointer;
+    background-color: #1f3c8d;
+    transition: 0.2s;
+}
+
+.container a {
+    text-decoration: none; color: black;
+    font-size: 16px;
+}
+
+.container a:hover {
+    font-weight: 700;
 }

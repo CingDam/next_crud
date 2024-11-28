@@ -4,7 +4,7 @@ import detailStyle from "./detail.module.css";
 import Link from "next/link";
 import { baseUrl } from "../../app/config";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import UpdateDetailModal from "../modal/detail/update/UpdateDetail";
 
 export default function Detail({id,datas,url}) {
@@ -68,12 +68,21 @@ export default function Detail({id,datas,url}) {
 
         const data = res.data
 
-        console.log(data)
+        if (data.chk) {
+            jobDelValRef.current.forEach(ref => {
+                if (ref) {
+                    ref.checked = false;
+                }
+            });
+            router.refresh();
+        } else {
+            console.error("삭제실패!")
+        }
     } 
 
     return (
         <div className={detailStyle.container}>
-            <table border={1}>
+            <table>
                 <thead>
                     <tr>
                         <th>체크</th>
@@ -84,7 +93,7 @@ export default function Detail({id,datas,url}) {
                 </thead>
                 <tbody>
                     {
-                        datas.map((data,index) => (
+                        datas ?  datas.map((data,index) => (
                             <tr key={index}>
                                 <td><input type="checkbox" 
                                 value={data.jobNum}
@@ -96,7 +105,7 @@ export default function Detail({id,datas,url}) {
                                 <td>{index+1}</td>
                                 <td>{data.jobTitle}</td>
                                 <td>
-                                    <div>
+                                    <div className= {detailStyle.util} >
                                         <button onClick={() => {onDetailUpdate(
                                             data.jobTitle,
                                             data.jobNum
@@ -104,16 +113,16 @@ export default function Detail({id,datas,url}) {
                                             <button onClick={()=> jobDel(data.jobNum)}>삭제</button>
                                     </div>
                                 </td>
-                            </tr>
-                            
-                        ))
+                            </tr>    
+                        )) :
+                        redirect("./")
                     }
                 </tbody>
             </table>
-            <div>
+            <div className={detailStyle.btnBox}>
                 <button>완료 작업 체크하기</button> <button onClick={multipleJobDelte}>다중 삭제</button>
             </div>
-            <div>
+            <div className={detailStyle.back}>
                 <Link href={'./'}>돌아가기</Link>
             </div>
             {
