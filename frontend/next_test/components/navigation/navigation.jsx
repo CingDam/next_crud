@@ -11,6 +11,10 @@ export default function Navigation({chk}) {
     useEffect(()=> {
         router.refresh();
     } ,[chk,path])
+
+    const sessionDel = () => {
+        sessionStorage.removeItem("session")
+    }
     return(
         <div className={naviStyle.container}>
              <Link href={'/'}><h2>To do List</h2></Link>
@@ -20,7 +24,7 @@ export default function Navigation({chk}) {
                 </div> 
             : 
             <div className={naviStyle.loginBox}>
-                <Link href={`${baseUrl}/logout`}>로그아웃</Link>
+                <Link href={`${baseUrl}/logout`} onClick={sessionDel}>로그아웃</Link>
              </div>
              }
             

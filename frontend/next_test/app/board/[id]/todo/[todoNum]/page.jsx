@@ -31,7 +31,6 @@ const getJobs = async (todoNum,session) => {
 export default async function TodoDetail({params}) {
     const {todoNum} = await params
     const session = await getSession();
-
     const jobs = await getJobs(todoNum, session);
     return (
         <>

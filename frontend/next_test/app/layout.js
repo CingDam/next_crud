@@ -28,6 +28,7 @@ export async function getSession() {
   if(!response.ok) {
     return null;
   }
+
   return response.json();
 }
 

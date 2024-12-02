@@ -1,0 +1,106 @@
+.title input {
+    margin-top: 10px;
+    border: none; border-bottom: 2px solid black; border-radius: 1px;
+    height: 24px; width: 325px;
+}
+.title input:focus {
+    outline: none;
+}
+.type {
+    margin-top: 20px;
+}
+.type select {
+    margin-top: 5px;
+    font-size: 14px;
+    border-bottom: 1px solid black;
+}
+.type select:focus {
+    outline: none;
+}
+.jobBox {
+    margin-top: 20px;
+    height: 360px;
+    overflow: auto;
+    -ms-overflow-style: none;
+}
+
+.jobBox::-webkit-scrollbar{
+    display: none;
+}
+
+.job {
+    margin-top: 20px;
+}
+
+.jobInput {
+    width: 325px;
+    border-bottom: 2px solid black; border-radius: 1px;
+}
+.job input {
+    border: none;
+    height: 24px; width: 265px;
+} 
+.job input:focus {
+    outline: none;
+}
+.baseJobInput {
+    width: 325px;
+    border-bottom: 2px solid black; border-radius: 1px;
+    margin-bottom: 30px;
+}
+.baseJobInput input {
+    width: 325px;
+}
+.jobAddBtn {
+    margin-top: 50px; margin-left: 250px;
+}
+.jobAddBtn > button {
+    padding: 10px;
+    border: none;
+    background-color: #001d6e;
+    color: white;
+}
+.jobAddBtn > button:hover {
+    cursor: pointer;
+    color: black; text-decoration: underline;
+    background-color: white;
+    transition: 0.3s;
+}
+.deleteJobInput > button {
+    position: relative;
+    left: 275px; bottom: 35px;
+    padding: 5px 10px;
+    border: none; color: white;
+    background-color: #001d6e;
+}
+.deleteJobInput > button:hover {
+    cursor: pointer;
+    color: black; text-decoration: underline;
+    background-color: white;
+    transition: 0.3s;
+}
+.buttonBox {
+    margin-left: 120px ; margin-top: 50px;
+}
+.buttonBox button {
+    border: none; color: white;
+    font-size: 18px;
+    width: 100px; height: 36px;
+    background-color: #001d6e;
+}
+.buttonBox button:hover {
+    cursor: pointer;
+    background-color: white; color: black;
+    box-shadow: 1px 1px 2px black;
+    transition: 0.2s;
+}
+.close {
+    position: absolute;
+    top: 15px;right: 15px;
+}
+.close > img {
+    width: 15px; height: 15px;
+}
+.close > img:hover {
+    cursor: pointer;
+}

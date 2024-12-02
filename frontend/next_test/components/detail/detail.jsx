@@ -6,16 +6,22 @@ import { baseUrl } from "../../app/config";
 import axios from "axios";
 import { redirect, useRouter } from "next/navigation";
 import UpdateDetailModal from "../modal/detail/update/UpdateDetail";
+import AddJob from "../modal/detail/add/AddJob";
 
 export default function Detail({id,datas,url}) {
     
     const router = useRouter();
 
     const [detailUpdate,setDetailUpdate] = useState(false);
+    const [detailAdd, setDetailAdd] = useState(false);
     const [title, setTitle] = useState("");
     const [jobNum, setJobNum] = useState("");
 
     const jobDelValRef = useRef([]); 
+
+    const addJob = ()  => {
+        setDetailAdd(true);
+    }
     
     const onDetailUpdate = (title,jobNum) => {
 
@@ -120,7 +126,7 @@ export default function Detail({id,datas,url}) {
                 </tbody>
             </table>
             <div className={detailStyle.btnBox}>
-                <button>완료 작업 체크하기</button> <button onClick={multipleJobDelte}>다중 삭제</button>
+                <button>완료 작업 체크하기</button> <button onClick={multipleJobDelte}>다중 삭제</button> <button onClick={addJob}>추가하기</button>
             </div>
             <div className={detailStyle.back}>
                 <Link href={'./'}>돌아가기</Link>
@@ -135,6 +141,10 @@ export default function Detail({id,datas,url}) {
                     url = {url}
                     router = {router}
                 />
+            }
+
+            {
+                detailAdd && <AddJob id={id} setDetailAdd={setDetailAdd} />
             }
         </div>
     )

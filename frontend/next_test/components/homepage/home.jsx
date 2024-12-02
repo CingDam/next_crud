@@ -2,8 +2,10 @@
 
 import Link from "next/link"
 import homeStyle from "./home.module.css"
+import { useEffect } from "react";
 
 export default function Home({session}) {
+    
     return(
         <div className={homeStyle.container}>
             <h1>나만의 일정을 만들어보세요!</h1>
