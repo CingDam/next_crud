@@ -19,9 +19,30 @@ export class JobDao {
       // 별칭.변수명으로 할 경우 자동적으로 엔터티에서 연결한 엔터티끼리 불러옴
       .select()
       .where("todoDetail.todo_todo_num = :todoNum", { todoNum: item.todoNum })
+      .orderBy("todoDetail.todo_todo_num")
       .getMany();
 
     return jobs;
+  }
+
+  addJobs(item: { id: number; contents: string[] }) {
+    console.log(item);
+    let affected = 0;
+    item.contents
+      .filter((content) => content !== "")
+      .forEach(async (content) => {
+        const addChk = await this.jobRepository.insert({
+          jobTitle: content,
+          todoDetailTodoTodoNum: item.id,
+        });
+        affected += addChk.raw.affected;
+      });
+
+    if (affected === item.contents.length) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   async updateJob(item: { jobNum: number; todoNum: number; title: string }) {

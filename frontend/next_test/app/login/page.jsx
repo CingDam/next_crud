@@ -1,12 +1,22 @@
+import { redirect } from "next/navigation";
 import Login, { LoginData } from "../../components/login/login"
 import { baseUrl } from "../config";
+import { getSession } from "../layout";
 
 export const metadata = {
     title : "login"
 }
 
-export default function LoginPage(){
+export default async function LoginPage(){
+    const session = await getSession();
+    console.log(session)
     return (
-        <Login></Login>
+        <>
+            {
+                session ? 
+                    redirect("/")
+                    : <Login></Login>
+            }
+        </>
     )    
 }

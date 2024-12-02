@@ -1,25 +1,21 @@
 "use client"
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import dashboardStyle from "./dashboard.module.css"
 import AddTodo from "../modal/dashboard/AddTodo";
 import { baseUrl } from "../../app/config";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Loading from "../../app/loading";
 
 const url = "todo";
 
 
-export default function Dashboard({datas,id}) {
+export default function Dashboard({datas,id, session}) {
     const [addModal, setAddModal] = useState(false);
-    const [detailModal , setDetailModal] = useState(false);
-
     const delValRef = useRef([]);
     const router = useRouter();
-    const path = usePathname();
-    
 
-    console.log(datas);
     const dayOfWeek = ['월', '화', '수', '목', '금', '일', '월']
     const jobType = {
        design: '디자인',
@@ -79,7 +75,9 @@ export default function Dashboard({datas,id}) {
         }
     }
     
-    return (<div className={dashboardStyle.container}>
+
+    return (
+    <div className={dashboardStyle.container}>
         <table>
             <thead>
                 <tr>
@@ -110,9 +108,9 @@ export default function Dashboard({datas,id}) {
                                 <div>{dates[index].year}-{dates[index].month}-{dates[index].date} {dates[index].day}요일</div>
                             }</td>
                             <td>
-                               <button onClick={() => {
+                            <button onClick={() => {
                                 deleteTodo(data.todoNum)
-                               }}>삭제</button>
+                            }}>삭제</button>
                             </td>
                     </tr>
                     )
@@ -121,7 +119,27 @@ export default function Dashboard({datas,id}) {
             </tbody>
         </table>
         <div>
-
+        <div className={dashboardStyle.paging}>
+            <div>
+                <Link href={'?page=1'}>{'<<'}</Link>
+            </div>
+            <div>
+                <Link href={'?page=1'}>{'<'}</Link>
+            </div>
+            <div className={dashboardStyle.pageList}>
+                <Link href={'?page=1'}>1</Link>
+                <Link href={'?page=1'}>2</Link>
+                <Link href={'?page=1'}>3</Link>
+                <Link href={'?page=1'}>4</Link>
+                <Link href={'?page=1'}>5</Link>
+            </div>
+            <div>
+                <Link href={'?page=1'}>{'>'}</Link>
+            </div>
+            <div>
+                <Link href={'?page=1'}>{'>>'}</Link>
+            </div>
+        </div>
         </div>
         <div className={dashboardStyle.btnBox}>
             <button onClick={addTodoModal}>추가하기</button> <button onClick={todoMultipleDelete}>다중 삭제</button>

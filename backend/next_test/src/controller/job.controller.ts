@@ -25,6 +25,16 @@ export class JobController {
     }
   }
 
+  @Post("add-job")
+  async AddJobs(@Body() item: { id: number; contents: string[] }) {
+    const addChk = await this.jobService.addJobs(item);
+    if (addChk) {
+      return { chk: true };
+    } else {
+      return { chk: false };
+    }
+  }
+
   @Put("update-job")
   async UpdateJob(
     @Body() item: { todoNum: number; jobNum: number; title: string },

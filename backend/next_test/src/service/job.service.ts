@@ -9,6 +9,16 @@ export class JobService {
     return await this.jobDao.getJobs(item);
   }
 
+  async addJobs(item: { id: number; contents: string[] }) {
+    const addChk = await this.jobDao.addJobs(item);
+
+    if (addChk) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   async updateJob(item: { todoNum: number; jobNum: number; title: string }) {
     const updateChk = await this.jobDao.updateJob(item);
 

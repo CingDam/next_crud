@@ -29,13 +29,15 @@ const getTodoList = async ({id}) => {
 export default async function DashboardPage({params}) {
     const id = await params
     const datas = await getTodoList(id);
+    const session = await getSession();
     return (
         <>
-            { await getSession() !== null ?
+           {
+            session ? 
             <Suspense fallback={<Loading></Loading>}>
-                <Dashboard datas={datas} id={id}/>
-            </Suspense>
-            :
-            redirect("/")}
+            <Dashboard datas={datas} id={id} session={session}/>
+            </Suspense> :
+            redirect("/")
+           }
         </>
     )}

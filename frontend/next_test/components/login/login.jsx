@@ -2,19 +2,20 @@
 
 import Link from "next/link"
 import loginStyle from "./login.module.css"
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { baseUrl } from "../../app/config";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 
 const url = 'user'
 
 
 export default function Login() {
+
+
     const idRef = useRef('');
     const pwRef = useRef('');
     const router = useRouter();
-
     async function loginOn(id,pwd) {
         
         try {
@@ -40,6 +41,10 @@ export default function Login() {
                 const data = await response.json();
                 console.log(data);
                 if(data.user){
+                        // sessionStorage 에서 setItem은 object타입은 JSON.stringify로 변환해서 넣기 => sessionStorage는 string만 들어갈수 잇음
+                        sessionStorage.setItem("session",JSON.stringify(data.user));
+                        // getItem은 다시 json으로 바꿔야하니까 object문자열을 다시 json으로 parse(변환)해서 받아야하게 때문에 JSON.parse로 받아오기
+                        
                     router.push(`/board/${data.user.userNum}/todo`);
                 }
 
@@ -55,6 +60,7 @@ export default function Login() {
             loginOn(idRef.current.value,pwRef.current.value)
         }
     }
+    
     return (
         <div className={loginStyle.container}>
             <div className={loginStyle.box}>
