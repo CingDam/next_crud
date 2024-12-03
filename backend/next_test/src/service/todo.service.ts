@@ -1,13 +1,20 @@
 import { Injectable } from "@nestjs/common";
 import { TodoDao } from "src/dao/todo.dao";
+import { Pager } from "src/util/pager";
 
 @Injectable()
 export class TodoService {
-  constructor(private readonly todoDao: TodoDao) {}
+  constructor(
+    private readonly todoDao: TodoDao,
+    private readonly pager: Pager,
+  ) {}
 
   async getTodoList(item: { id: number }) {
     const datas = await this.todoDao.getTodoList(item);
     console.log(datas);
+    const total = await this.todoDao.total(item);
+    console.log("todo Total:", total);
+    this.pager.total = total;
     return datas;
   }
 
