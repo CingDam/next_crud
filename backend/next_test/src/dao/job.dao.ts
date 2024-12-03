@@ -24,7 +24,15 @@ export class JobDao {
 
     return jobs;
   }
+  async total(item: { todoNum: number }) {
+    const total = this.jobRepository.count({
+      where: {
+        todoDetailTodoTodoNum: item.todoNum,
+      },
+    });
 
+    return total;
+  }
   addJobs(item: { id: number; contents: string[] }) {
     console.log(item);
     let affected = 0;

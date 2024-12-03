@@ -33,7 +33,15 @@ export class TodoDao {
       .getMany();
     return datas;
   }
+  async total(item: { id: number }) {
+    const total = await this.todoRepository.count({
+      where: {
+        todoNum: item.id,
+      },
+    });
 
+    return total;
+  }
   async addTodoList(item: {
     id: number;
     title: string;
