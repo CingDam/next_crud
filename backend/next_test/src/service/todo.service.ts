@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { TodoDao } from "src/dao/todo.dao";
-import { Pager } from "src/util/pager";
+import { Pager } from "src/util/pager.util";
 
 @Injectable()
 export class TodoService {
