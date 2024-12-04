@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Post, Put } from "@nestjs/common";
 import { JobService } from "src/service/job.service";
 import { TodoService } from "src/service/todo.service";
+import { Pager } from "src/util/pager.util";
 
 @Controller("/jobs")
 export class JobController {
@@ -10,7 +11,9 @@ export class JobController {
   ) {}
 
   @Post("get-job")
-  async getJobs(@Body() item: { userNum: number; todoNum: number }) {
+  async getJobs(
+    @Body() item: { userNum: number; todoNum: number; pager: Pager },
+  ) {
     const jobs = await this.jobService.getJobs(item);
     console.log("할 일 길이:", jobs.length);
 
@@ -32,6 +35,16 @@ export class JobController {
       return { chk: true };
     } else {
       return { chk: false };
+    }
+  }
+
+  @Post("dummy")
+  async dummy(@Body() item: { id: number }) {
+    const dummyChk = this.jobService.dummy(item);
+    if (dummyChk) {
+      return true;
+    } else {
+      return false;
     }
   }
 

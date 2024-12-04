@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { TodoDetailJob } from "src/entity/table/job.entity";
+import { Pager } from "src/util/pager.util";
 import { In, Repository } from "typeorm";
 
 @Injectable()
@@ -10,7 +11,10 @@ export class JobDao {
     private jobRepository: Repository<TodoDetailJob>,
   ) {}
 
-  async getJobs(item: { todoNum: number }): Promise<TodoDetailJob[]> {
+  async getJobs(item: {
+    todoNum: number;
+    pager: Pager;
+  }): Promise<TodoDetailJob[]> {
     console.log(item.todoNum);
     const jobs = await this.jobRepository
       .createQueryBuilder("job") // 조회할 테이블 별칭 설정
@@ -25,7 +29,7 @@ export class JobDao {
     return jobs;
   }
   async total(item: { todoNum: number }) {
-    const total = this.jobRepository.count({
+    const total = await this.jobRepository.count({
       where: {
         todoDetailTodoTodoNum: item.todoNum,
       },
@@ -49,6 +53,22 @@ export class JobDao {
     if (affected === item.contents.length) {
       return true;
     } else {
+      return false;
+    }
+  }
+
+  async dummy(item: { id: number }) {
+    try {
+      for (let i = 0; i < 100; i++) {
+        await this.jobRepository.insert({
+          jobTitle: `더미 할 일 ${i}`,
+          todoDetailTodoTodoNum: item.id,
+        });
+      }
+
+      return true;
+    } catch (err) {
+      console.log(err);
       return false;
     }
   }

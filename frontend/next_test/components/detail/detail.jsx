@@ -23,6 +23,28 @@ export default function Detail({id,datas,url}) {
         setDetailAdd(true);
     }
     
+    const dummy = async () => {
+        const res = await axios.post(`${baseUrl}/${url}/dummy`,
+            {
+                id: id
+            }
+            ,{
+            header: {
+                "Content-Type" : "application/json"
+            }
+        })
+
+        const data = res.data
+
+        console.log(res);
+        
+        if(data) {
+            router.refresh();
+        } else {
+            console.error("더미 추가 실패")
+        }
+    }
+
     const onDetailUpdate = (title,jobNum) => {
 
         setDetailUpdate(true);
@@ -126,7 +148,7 @@ export default function Detail({id,datas,url}) {
                 </tbody>
             </table>
             <div className={detailStyle.btnBox}>
-                <button>완료 작업 체크하기</button> <button onClick={multipleJobDelte}>다중 삭제</button> <button onClick={addJob}>추가하기</button>
+                <button>완료 작업 체크하기</button> <button onClick={multipleJobDelte}>다중 삭제</button> <button onClick={addJob}>추가하기</button> <button onClick={dummy}>더미추가</button>
             </div>
             <div className={detailStyle.back}>
                 <Link href={'./'}>돌아가기</Link>
