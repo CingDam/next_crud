@@ -9,8 +9,15 @@ export class TodoController {
   async getTodoList(@Body() item: { id: number }) {
     console.log(item);
     const todoList = await this.todoService.getTodoList(item);
+
+    console.log(todoList);
+
     if (todoList) {
-      return { message: "조회성공", item: todoList };
+      return {
+        message: "조회성공",
+        item: todoList.data,
+        total: todoList.total,
+      };
     } else {
       return { message: "조회 실패" };
     }

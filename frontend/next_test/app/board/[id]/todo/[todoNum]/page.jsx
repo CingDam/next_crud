@@ -22,8 +22,8 @@ const getJobs = async (todoNum,session) => {
         })
     
         const data = res.data
-    
-        return data.item;
+
+        return data;
     }
 }
 
@@ -37,7 +37,7 @@ export default async function TodoDetail({params}) {
             {
                 session ?
                 <Suspense fallback={<Loading></Loading>}>
-                    <Detail id={todoNum} datas={jobs} url={url}></Detail>
+                    <Detail id={todoNum} datas={jobs.item} total={jobs.total} url={url}></Detail>
                 </Suspense>  :
                 redirect("/")
             }

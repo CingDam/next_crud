@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Post, Put } from "@nestjs/common";
 import { JobService } from "src/service/job.service";
 import { TodoService } from "src/service/todo.service";
-import { Pager } from "src/util/pager.util";
 
 @Controller("/jobs")
 export class JobController {
@@ -11,17 +10,19 @@ export class JobController {
   ) {}
 
   @Post("get-job")
-  async getJobs(
-    @Body() item: { userNum: number; todoNum: number; pager: Pager },
-  ) {
+  async getJobs(@Body() item: { userNum: number; todoNum: number }) {
     const jobs = await this.jobService.getJobs(item);
-    console.log("할 일 길이:", jobs.length);
+    console.log("할 일 길이:", jobs);
 
-    if (jobs.length === 0) {
+    if (jobs.data.length === 0) {
       this.todoService.deleteTodoList(item);
     } else {
       if (jobs) {
-        return { message: "할 일 목록 받아오기 성공!", item: jobs };
+        return {
+          message: "할 일 목록 받아오기 성공!",
+          item: jobs.data,
+          total: jobs.total,
+        };
       } else {
         return { message: "받아오기 실패!" };
       }
