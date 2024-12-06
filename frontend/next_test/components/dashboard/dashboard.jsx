@@ -11,7 +11,7 @@ import Loading from "../../app/loading";
 const url = "todo";
 
 
-export default function Dashboard({datas,id, session}) {
+export default function Dashboard({datas,id, session, total}) {
     const [addModal, setAddModal] = useState(false);
     const delValRef = useRef([]);
     const router = useRouter();

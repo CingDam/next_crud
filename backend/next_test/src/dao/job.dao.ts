@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { TodoDetailJob } from "src/entity/table/job.entity";
-import { Pager } from "src/util/pager.util";
 import { In, Repository } from "typeorm";
 
 @Injectable()
@@ -11,10 +10,7 @@ export class JobDao {
     private jobRepository: Repository<TodoDetailJob>,
   ) {}
 
-  async getJobs(item: {
-    todoNum: number;
-    pager: Pager;
-  }): Promise<TodoDetailJob[]> {
+  async getJobs(item: { todoNum: number }): Promise<TodoDetailJob[]> {
     console.log(item.todoNum);
     const jobs = await this.jobRepository
       .createQueryBuilder("job") // 조회할 테이블 별칭 설정

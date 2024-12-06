@@ -7,17 +7,39 @@ import axios from "axios";
 import { redirect, useRouter } from "next/navigation";
 import UpdateDetailModal from "../modal/detail/update/UpdateDetail";
 import AddJob from "../modal/detail/add/AddJob";
+import ReactPaginate from "react-paginate";
 
-export default function Detail({id,datas,url}) {
+export default function Detail({id,datas,url,total}) {
     
+    
+
     const router = useRouter();
 
     const [detailUpdate,setDetailUpdate] = useState(false);
     const [detailAdd, setDetailAdd] = useState(false);
     const [title, setTitle] = useState("");
     const [jobNum, setJobNum] = useState("");
+    const [perPage, setPerPage]  = useState(10);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [currentGroup, setCurrentGroup] = useState(0);
 
     const jobDelValRef = useRef([]); 
+
+    const perGroup = 5;
+    const offset = currentPage * perPage;
+    const pageCount = Math.ceil(total)/perPage;
+    const groupStart = currentGroup * perGroup;
+    const groupEnd = Math.min(groupStart + perGroup, pageCount);
+    const currentItems = datas.slice(offset, offset + perPage);
+
+    const changePage = (e) => {
+        setCurrentPage(e.selected);
+        // 선택된 페이지가 현재 그룹 범위 밖이면 그룹 업데이트
+        if (e.selected < groupStart || e.selected >= groupEnd) {
+          setCurrentGroup(Math.floor(e.selected / perGroup));
+        }
+    }
+
 
     const addJob = ()  => {
         setDetailAdd(true);
@@ -121,7 +143,7 @@ export default function Detail({id,datas,url}) {
                 </thead>
                 <tbody>
                     {
-                        datas ?  datas.map((data,index) => (
+                        datas ?  currentItems.map((data,index) => (
                             <tr key={index}>
                                 <td><input type="checkbox" 
                                 value={data.jobNum}
@@ -147,8 +169,29 @@ export default function Detail({id,datas,url}) {
                     }
                 </tbody>
             </table>
+            <div>
+                <ReactPaginate
+                    previousLabel={"<"}
+                    nextLabel={">"}
+                    pageCount={pageCount}
+                    forcePage={currentPage}
+                    breakLabel={null}
+                    marginPagesDisplayed={0}
+                    pageRangeDisplayed={groupEnd - groupStart}
+                    renderOnZeroPageCount={null}
+                    onPageChange={changePage}
+                    containerClassName={"pagenation"}
+                    activeClassName={"active"}
+                    previousClassName={"prev"}
+                    nextClassName={"next"}
+                >
+                </ReactPaginate>
+            </div>
             <div className={detailStyle.btnBox}>
-                <button>완료 작업 체크하기</button> <button onClick={multipleJobDelte}>다중 삭제</button> <button onClick={addJob}>추가하기</button> <button onClick={dummy}>더미추가</button>
+                <button>완료 작업 체크하기</button> 
+                <button onClick={multipleJobDelte}>다중 삭제</button>
+                <button onClick={addJob}>추가하기</button>
+                <button onClick={dummy}>더미추가</button>
             </div>
             <div className={detailStyle.back}>
                 <Link href={'./'}>돌아가기</Link>

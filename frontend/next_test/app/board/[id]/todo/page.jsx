@@ -22,7 +22,7 @@ const getTodoList = async ({id}) => {
     })
 
     const data = await res.json();
-    return data.item;
+    return data;
     
 }
 
@@ -35,7 +35,7 @@ export default async function DashboardPage({params}) {
            {
             session ? 
             <Suspense fallback={<Loading></Loading>}>
-            <Dashboard datas={datas} id={id} session={session}/>
+            <Dashboard datas={datas.item} total={datas.total} id={id} session={session}/>
             </Suspense> :
             redirect("/")
            }

@@ -1,19 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { JobDao } from "src/dao/job.dao";
-import { Pager } from "src/util/pager.util";
 
 @Injectable()
 export class JobService {
-  constructor(
-    private readonly jobDao: JobDao,
-    private readonly pager: Pager,
-  ) {}
+  constructor(private readonly jobDao: JobDao) {}
 
-  async getJobs(item: { todoNum: number; pager: Pager }) {
+  async getJobs(item: { todoNum: number }) {
     const total = await this.jobDao.total(item);
     console.log("job pager:", total);
-    this.pager.total = total;
-    return await this.jobDao.getJobs(item);
+    return { data: await this.jobDao.getJobs(item), total: total };
   }
 
   async addJobs(item: { id: number; contents: string[] }) {
